@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.handzap.thehindu.model.Article;
+import com.handzap.thehindu.model.ArticleDTO;
 import com.handzap.thehindu.service.NewsService;
 
 @RestController
@@ -30,12 +30,12 @@ public class NewsController {
 	}
 
 	@GetMapping(value = "/articles/author")
-	List<Article> getArticlesByAuthorName(@RequestParam String name) throws UnsupportedEncodingException {
+	List<ArticleDTO> getArticlesByAuthorName(@RequestParam String name) throws UnsupportedEncodingException {
 		return newsService.getArticlesByAuthorName(name);
 	}
 
 	@GetMapping(value = "/articles/content")
-	List<Article> getArticlesByTitleOrDescription(@RequestParam String content) {
+	List<ArticleDTO> getArticlesByTitleOrDescription(@RequestParam String content) {
 		return newsService.getArticlesByTitleOrDescription(content);
 	}
 }

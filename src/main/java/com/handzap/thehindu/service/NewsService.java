@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.handzap.thehindu.model.Article;
+import com.handzap.thehindu.model.ArticleDTO;
 import com.handzap.thehindu.model.News;
 
 @Service
@@ -29,7 +30,7 @@ public class NewsService {
 		Integer count = 0;
 		final String uri = "https://newsapi.org/v2/everything?sources=the-hindu&apiKey=e0ba8be8d4084586aa07631828dfee9b";
 
-		//fetching data from https://newsapi.org/s/the-hindu-api
+		// fetching data from https://newsapi.org/s/the-hindu-api
 		String result = restTemplate.getForObject(uri, String.class);
 		try {
 			news = objectMapper.readValue(result, News.class);
@@ -58,24 +59,24 @@ public class NewsService {
 		return authorsMap.keySet();
 	}
 
-	public List<Article> getArticlesByAuthorName(String name) {
+	public List<ArticleDTO> getArticlesByAuthorName(String name) {
 		isDataPresent();
 		List<Integer> ids = authorsMap.get(name);
-		List<Article> selectedArticles = new ArrayList<>();
+		List<ArticleDTO> selectedArticles = new ArrayList<>();
 
 		for (Integer id : ids) {
-			selectedArticles.add(articles.get(id));
+			selectedArticles.add(new ArticleDTO(articles.get(id)));
 		}
 		return selectedArticles;
 	}
 
-	public List<Article> getArticlesByTitleOrDescription(String content) {
+	public List<ArticleDTO> getArticlesByTitleOrDescription(String content) {
 		isDataPresent();
-		List<Article> selectedArticles = new ArrayList<>();
+		List<ArticleDTO> selectedArticles = new ArrayList<>();
 
 		for (Article article : articles) {
 			if (article.getTitle().contains(content) || article.getDescription().contains(content)) {
-				selectedArticles.add(article);
+				selectedArticles.add(new ArticleDTO(article));
 			}
 		}
 		return selectedArticles;
