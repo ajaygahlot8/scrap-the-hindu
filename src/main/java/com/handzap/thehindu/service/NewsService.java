@@ -64,8 +64,10 @@ public class NewsService {
 		List<Integer> ids = authorsMap.get(name);
 		List<ArticleDTO> selectedArticles = new ArrayList<>();
 
-		for (Integer id : ids) {
-			selectedArticles.add(new ArticleDTO(articles.get(id)));
+		if (ids != null) {
+			for (Integer id : ids) {
+				selectedArticles.add(new ArticleDTO(articles.get(id)));
+			}
 		}
 		return selectedArticles;
 	}
