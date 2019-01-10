@@ -1,6 +1,9 @@
 # scrap-the-hindu
 Spring boot project which fetches data from https://newsapi.org/s/the-hindu-api and gives ability to search data via API written
 
+# NOTE
+Newsapi returns latest 20 articles sorted by recent date. Hence this project will show data based upon recent articles fetched.
+
 # Steps to run the project
 1. Cone the project
 2. Inside project folder run $ mvn spring-boot:run
